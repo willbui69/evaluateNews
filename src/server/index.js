@@ -5,9 +5,6 @@ const fetch = require('node-fetch')
 const dotenv = require('dotenv')
 dotenv.config();
 
-//endpoint for server
-projectData = {};
-
 const app = express()
 
 app.use(express.static('dist'))
@@ -39,23 +36,21 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
+const baseUrl = "https://api.meaningcloud.com/sentiment-2.1?key=";
+const apiKey = process.env.API_KEY;  
+
 //Get the user input sent from the client side
-app.post('/post', async function (req, res){
-    //Save data to the project endpoint
-    projectData["text"] = req.body.text;
-    res.send(projectData);
-
-    //Send the user input to the meaningcloud service
-    const apiKey = process.env.API_KEY;    
-    const formText = projectData.text;
-
-    const result = await fetch("https://api.meaningcloud.com/sentiment-2.1?key=" + apiKey + "&url=" + formText + "&lang=en")
-    try {
-        console.log(result)
-        const response = await result.json();
-        res.send(response)
-        console.log(response)
-    } catch (error) {
-        console.log("error", error);
-    }
-})
+ app.post('/post', async function (req, res){
+     const formText = req.body.text;
+    console.log(formText)
+     //Send the user input to the meaningcloud service   
+     const result = await fetch(`${baseUrl}${apiKey}&txt=${formText}&lang=en`)
+     try {
+         console.log(result)
+         const response = await result.json();
+         res.send(response)
+         console.log(response)
+     } catch (error) {
+         console.log("error", error);
+     }
+ })
