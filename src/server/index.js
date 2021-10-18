@@ -4,7 +4,6 @@ const mockAPIResponse = require('./mockAPI.js')
 const fetch = require('node-fetch')
 const dotenv = require('dotenv')
 dotenv.config();
-const FormData = require('form-data');
 
 //endpoint for server
 projectData = {};
@@ -41,31 +40,22 @@ app.get('/test', function (req, res) {
 })
 
 //Get the user input sent from the client side
-app.post('/post', function (req, res){
+app.post('/post', async function (req, res){
     //Save data to the project endpoint
-    projectData["text"] = req.body;
+    projectData["text"] = req.body.text;
     res.send(projectData);
-    console.log(projectData.text);
+
+    //Send the user input to the meaningcloud service
+    const apiKey = process.env.API_KEY;    
+    const formText = projectData.text;
+
+    const result = await fetch("https://api.meaningcloud.com/sentiment-2.1?key=" + apiKey + "&url=" + formText + "&lang=en")
+    try {
+        console.log(result)
+        const response = await result.json();
+        res.send(response)
+        console.log(response)
+    } catch (error) {
+        console.log("error", error);
+    }
 })
-
-//Send the user input to the meaningcloud service
-const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
-const apiKey = process.env.API_KEY;
-const formdata = new FormData();
-formdata.append("key", "c8f276325a70f62e1c86bc98fbb48eb6");
-formdata.append("txt", projectData.text);
-formdata.append("lang", "en");  // 2-letter code, like en es fr ...
-
-const requestOptions = {
-    method: 'POST',
-    body: formdata,
-    redirect: 'follow'
-    };
-
-const res = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-.then(res => ({
-       status: res.status, 
-       body: res.json()
-     }))
-      .then(({ status, body }) => console.log(status, body))
-      .catch(error => console.log('error', error));
