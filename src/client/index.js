@@ -18,7 +18,10 @@ document.getElementById('submit').addEventListener('click', sendData);
 function sendData() {
     // Retrieve the text user want to check
     const textInput = document.getElementById('name').value;
+
+    //Function to post data to server side
     postData('/post',{text:textInput})
+    
 }
 const postData = async (url = '', data= {}) => {
     const response = await fetch(url, {
@@ -31,7 +34,6 @@ const postData = async (url = '', data= {}) => {
     })
     try {
         const newdata = await response.json();
-        return newdata
     } catch(error) {
         console.log("error", error);
     }

@@ -1,9 +1,11 @@
 var path = require('path')
 const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
 const fetch = require('node-fetch')
 const dotenv = require('dotenv')
 dotenv.config();
+
+//endpoint for server
+projectData = {};
 
 const app = express()
 
@@ -32,25 +34,29 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
+ //Get user input from client side
+ app.post("/post", async (req, res)=>{
+     const userInput = await req.body.text;
 
-const baseUrl = "https://api.meaningcloud.com/sentiment-2.1?key=";
-const apiKey = process.env.API_KEY;  
+     //Send user input to the meaningcloud service
+    getMeaningCloudData(userInput)
+    .then((data)=>{
+        app.get('/get',async (request, response)=>{
+            response.send(data);
+        })
+    })
+ })
 
-//Get the user input sent from the client side
- app.post('/post', async function (req, res){
-     const formText = req.body.text;
-    console.log(formText)
-     //Send the user input to the meaningcloud service   
-     const result = await fetch(`${baseUrl}${apiKey}&txt=${formText}&lang=en`)
+ const getMeaningCloudData = async (text)=>{
+     const baseUrl = "https://api.meaningcloud.com/sentiment-2.1?key=";
+     const apiKey = process.env.API_KEY;
+     const result = await fetch(`${baseUrl}${apiKey}&txt=${text}&lang=en`)
      try {
-         console.log(result)
          const response = await result.json();
-         res.send(response)
+         //Return the analysed result from meaningcloud service
          console.log(response)
-     } catch (error) {
+         return response
+     }catch(error) {
          console.log("error", error);
      }
- })
+ } 
