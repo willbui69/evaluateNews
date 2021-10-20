@@ -4,9 +4,6 @@ const fetch = require('node-fetch')
 const dotenv = require('dotenv')
 dotenv.config();
 
-//endpoint for server
-projectData = {};
-
 const app = express()
 
 app.use(express.static('dist'))
