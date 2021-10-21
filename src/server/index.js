@@ -33,12 +33,14 @@ app.listen(8081, function () {
 
  //Get user input from client side
  app.post("/post", async (req, res)=>{
-     const userInput = await req.body.text;
+    const userInput = await req.body.text;
 
-     //Send user input to the meaningcloud service
+    //Send user input to the meaningcloud service
     getMeaningCloudData(userInput)
     .then((data)=>{
-        app.get('/get',async (request, response)=>{
+
+        //Send analysed data from meaningcloud to the client side
+        app.get("/get",async (request, response)=>{
             response.send(data);
         })
     })
@@ -51,7 +53,7 @@ app.listen(8081, function () {
      try {
          const response = await result.json();
          //Return the analysed result from meaningcloud service
-         console.log(response)
+         console.log(response);
          return response
      }catch(error) {
          console.log("error", error);

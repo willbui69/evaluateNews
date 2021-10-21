@@ -20,8 +20,10 @@ function sendData() {
     const textInput = document.getElementById('name').value;
 
     //Function to post data to server side
-    postData('/post',{text:textInput})
-    
+    postData('/post',{text:textInput})   
+    .then(()=>
+        handleSubmit()
+    )
 }
 const postData = async (url = '', data= {}) => {
     const response = await fetch(url, {
