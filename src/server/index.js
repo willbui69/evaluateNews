@@ -19,6 +19,7 @@ console.log(__dirname)
 // Cors for cross origin allowance
 const cors = require('cors');
 const { response } = require('express');
+const { request } = require('http');
 app.use(cors());
 
 app.get('/', function (req, res) {
@@ -33,17 +34,17 @@ app.listen(8081, function () {
 
  //Get user input from client side
  app.post("/post", async (req, res)=>{
-    const userInput = await req.body.text;
+    try {
+        const userInput = await req.body.text;
 
-    //Send user input to the meaningcloud service
-    getMeaningCloudData(userInput)
-    .then((data)=>{
+        const data = await getMeaningCloudData(userInput);
 
-        //Send analysed data from meaningcloud to the client side
-        app.get("/get",async (request, response)=>{
+        app.get("/get", async(request, response)=>{
             response.send(data);
         })
-    })
+    }catch(error){
+        console.log("error", error);
+    }
  })
 
  const getMeaningCloudData = async (text)=>{
@@ -53,7 +54,7 @@ app.listen(8081, function () {
      try {
          const response = await result.json();
          //Return the analysed result from meaningcloud service
-         console.log(response);
+         console.log(response.confidence);
          return response
      }catch(error) {
          console.log("error", error);
