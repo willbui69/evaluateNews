@@ -5,13 +5,14 @@ async function handleSubmit(event) {
     let userInput = document.getElementById('name').value
     Client.checkForName(userInput)
 
-    postData('/post',{text:userInput}) 
-
     console.log("::: Form Submitted :::")
-    const res = await fetch('/get')
+
     try {
-        const response = await res.json();
-        document.getElementById('results').innerHTML = response.confidence
+        //Send user input to server side and get meaningclound's analysed data back from server side 
+        const result = await postData('http://localhost:8081/post',{text: userInput})
+
+        //Update the UI
+        document.getElementById('results').innerHTML = result.confidence
     }catch(error){
         console.log("error",error);
     }
@@ -27,7 +28,9 @@ const postData = async (url = '', data= {}) => {
         body: JSON.stringify(data),
     })
     try {
-        const newdata = await response.json();
+        //Get analysed data from server side
+        const analysedData = await response.json();
+        return analysedData
     } catch(error) {
         console.log("error", error);
     }
