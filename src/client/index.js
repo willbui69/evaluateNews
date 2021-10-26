@@ -7,6 +7,12 @@ import './styles/footer.scss'
 import './styles/form.scss'
 import './styles/header.scss'
 
+document.getElementById('submit').addEventListener('click',requestData);
+
+function requestData(){
+    handleSubmit(event);
+}
+
 export {
     checkForName,
     handleSubmit
