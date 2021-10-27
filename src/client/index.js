@@ -6,6 +6,7 @@ import './styles/base.scss'
 import './styles/footer.scss'
 import './styles/form.scss'
 import './styles/header.scss'
+import './images/logo.png'
 
 document.getElementById('submit').addEventListener('click',requestData);
 
