@@ -12,7 +12,9 @@ async function handleSubmit(event) {
         const result = await postData('http://localhost:8081/post',{text: userInput})
 
         //Update the UI
-        document.getElementById('results').innerHTML = result.confidence
+        document.getElementById('results').innerHTML = `<p style="font-family: fantasy;"> Agreement:   ${result.agreement}</p>
+                                                        <p style="font-family: fantasy;"> Confidence:  ${result.confidence}</p>
+                                                        <p style="font-family: fantasy;"> Score_tag:   ${result.score_tag}</p>`
     }catch(error){
         console.log("error",error);
     }
