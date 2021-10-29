@@ -1,11 +1,41 @@
 header {
-    display: flex;
+    grid-area: hd;
     justify-content: space-between;
+    margin-top: 20px;
     padding: 10px 40px;
+    display: flex;
+    justify-content: first baseline;
 }
 
-#logo {
-    //I think something wrong with this img link
-    background: url("../images/logo.png");
-    background-size: cover;
+#logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
+
+h1 {
+    letter-spacing: 2px;
+    font-family:'Times New Roman', Times, serif;
+    .white {
+        font-size: 40px;
+        color: white;
+        margin-right: 5px;
+    }
+    .gold {
+        font-size: 25px;
+        color: gold;
+        font-style: italic;
+    }    
+}
+
+h2 {
+    text-decoration: none;
+    .white {
+        font-size: 20px;
+        color: white;
+        margin-right: 15px;
+    }
+}
+
+
+

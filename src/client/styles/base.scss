@@ -1,13 +1,25 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    text-decoration: none;
+}
+
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 13% auto 13%;
+    grid-template-rows: 15% auto 10%;
+    grid-template-areas: 
+    "hd hd hd" 
+    "main main main"
+    "footer footer footer";
+    border: 1px solid white;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
-main {
-    flex: 1;
-}
+// main {
+//     flex: 1;
+// }
 
 section {
     max-width: 800px;

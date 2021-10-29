@@ -1,13 +1,17 @@
+main {
+    grid-area: main;
+    border: 1px solid white;
+}
+
 .form-container {
     border: 1px solid white;
     border-radius: 5px;
     padding: 40px;
     text-align: center;
-    margin-top: 100px;
 }
 
 textarea {
-    padding: 5px 20px;
+    padding: 5px 10px;
     width: 100%;
     height: 150px;
     line-height: 25px;
@@ -21,7 +25,7 @@ textarea {
 strong {
     font-size: large;
     font-family: fantasy;
-    color:white;
+    color:gold;
 }
 
 #results {
