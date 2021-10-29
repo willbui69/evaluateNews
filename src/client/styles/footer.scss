@@ -1,4 +1,16 @@
 footer {
     grid-area: footer;
     border: 1px solid white; 
+    justify-content: space-evenly;
 }
+
+ #meaningcloud-logo img {
+     width: 70px;
+     height: 70px;
+ }
+
+ #meaningcloud-logo strong {
+     font-family: 'Times New Roman', Times, serif;
+     font-size: 18px;
+     margin-left: 20px;
+ }

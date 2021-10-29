@@ -4,7 +4,6 @@ header {
     margin-top: 20px;
     padding: 10px 40px;
     display: flex;
-    justify-content: first baseline;
 }
 
 #logo img {
@@ -21,14 +20,14 @@ h1 {
         color: white;
         margin-right: 5px;
     }
+
     .gold {
         font-size: 25px;
         color: gold;
-        font-style: italic;
     }    
 }
 
-h2 {
+a {
     text-decoration: none;
     .white {
         font-size: 20px;
