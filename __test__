@@ -1,1 +1,0 @@
-import { checkForInput } from "../src/client/js/inputChecker"
