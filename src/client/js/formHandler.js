@@ -3,7 +3,7 @@ async function handleSubmit(event) {
 
     // check what text was put into the form field
     let userInput = document.getElementById('name').value
-    Client.checkForName(userInput)
+    Client.checkForInput(userInput)
 
     console.log("::: Form Submitted :::")
 
@@ -12,9 +12,9 @@ async function handleSubmit(event) {
         const result = await postData('http://localhost:8081/post',{text: userInput})
 
         //Update the UI
-        document.getElementById('results').innerHTML = `<p style="font-family: fantasy;"> Agreement:   ${result.agreement}</p>
-                                                        <p style="font-family: fantasy;"> Confidence:  ${result.confidence}</p>
-                                                        <p style="font-family: fantasy;"> Score_tag:   ${result.score_tag}</p>`
+        document.getElementById('results').innerHTML = `<p style="font-family: fantasy; color: white;"> <span style="color: gold;"> Agreement:</span>   ${result.agreement}</p>
+                                                        <p style="font-family: fantasy; color: white;"> <span style="color: gold;"> Confidence:</span>  ${result.confidence}</p>
+                                                        <p style="font-family: fantasy; color: white;"> <span style="color: gold;">Score_tag:</span>   ${result.score_tag}</p>`
     }catch(error){
         console.log("error",error);
     }
