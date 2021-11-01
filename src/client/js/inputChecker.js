@@ -1,7 +1,9 @@
-function checkForIput(inputText) {
+function checkForInput(inputText) {
     console.log("::: Running checkForInput :::", inputText)
 
-    if(inputText.length==0) {
+    let text = inputText.trim();
+
+    if(text.length===0) {
         alert("Please place your text in the box before submit!")
     }
 }

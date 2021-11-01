@@ -1,4 +1,4 @@
-import { checkForInput } from './js/nameChecker'
+import { checkForInput } from './js/inputChecker'
 import { handleSubmit } from './js/formHandler'
 
 import './styles/resets.scss'
